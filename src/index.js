@@ -7,6 +7,7 @@ function Article() {
     <div className='hello' style={{color: 'red'}}>
       <h2>title</h2>
       {body}
+      <h3>creation date: {(new Date()). toDateString()}</h3>
     </div>
   )
 }
