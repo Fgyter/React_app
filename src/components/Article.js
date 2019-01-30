@@ -4,7 +4,7 @@ class Article extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isOpen: props.defaultOpen
+      count: 0
     }
   }
 
@@ -12,29 +12,22 @@ class Article extends Component {
     console.log('---', 'mounting')
   }
 
-  componentWillReceiveProps(nextProps) {
-    console.log('---', 'will receive props')
-    if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-      isOpen: nextProps.defaultOpen
-    })
-  }
-
   componentWillUpdate() {
     console.log('---', 'will update')
   }
 
   render() {
-    const {article} = this.props
-    console.log('---', this.props)
+    const {article, isOpen} = this.props
     const style = {width: '75%'}
-    const body = this.state.isOpen && <section>{article.text}</section>
+    const body = isOpen && <section> className="card-text">{article.text}</section>
     return (
       <div className="card mx-auto" style = {style}>
         <div className="card-header">
-          <h2>
+          <h2 onClick = {this.incrementCounter}>
             {article.title}
+            clicked {this.state.count}
             <button onClick={this.handleClick} className="btn btn-primary float-right">
-              {this.state.isOpen ? 'cloze' : 'open'}
+              {isOpen ? 'cloze' : 'open'}
             </button>
           </h2>
         </div>
@@ -50,10 +43,9 @@ class Article extends Component {
 
 
   handleClick = () => {
-    console.log('---', 'clicked')
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    // this.setState({
+    //   isOpen: !this.state.isOpen
+    // })
   }
 }
 
